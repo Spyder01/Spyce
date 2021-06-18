@@ -1,0 +1,27 @@
+{
+  "name": "spyce",
+  "version": "1.0.0",
+  "description": "A personal backend framework build on the top of Express.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Spyder01/Spyce.git"
+  },
+  "author": "Spyder01",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Spyder01/Spyce/issues"
+  },
+  "homepage": "https://github.com/Spyder01/Spyce#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.12.14",
+    "node-fetch": "^2.6.1"
+  }
+}
