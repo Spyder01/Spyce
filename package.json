@@ -1,10 +1,11 @@
 {
   "name": "spyce",
   "version": "1.0.0",
-  "description": "A personal backend framework build on the top of Express.js",
+  "description": "A personal backend framework for node.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index",
+    "dev": "nodemon index"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,9 @@
   },
   "dependencies": {
     "express": "^4.17.1",
+    "mongodb": "^3.6.8",
     "mongoose": "^5.12.14",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "uuid": "^8.3.2"
   }
 }
