@@ -1,2 +1,12 @@
 
 GET  http://localhost:5000/api
+
+###
+
+POST  http://localhost:5000/api
+
+###
+
+PUT  http://localhost:5000/api
+
+###
