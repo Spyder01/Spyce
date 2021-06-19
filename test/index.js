@@ -1,7 +1,7 @@
 const Spyce = require('../index');
 
 
-//Initializing Spice App
+//Initializing Spyce App
 const app = new Spyce();
 
 const api1 = app.createApi('/api', ()=>{
@@ -9,7 +9,18 @@ const api1 = app.createApi('/api', ()=>{
 
 })
 
-api1.request({GET: (req,res) =>{console.log('Get Request made'); res.setHeader('Content-Type', 'text/html'); res.end('<h1>Hello, World!</h1>')}, POST: (req,res)=>{res.setHeader('Content-Type', 'text/html'); res.end('<h1>Post Request!</h1>')} })
+api1.request({
+    GET: (req, res) => {
+        res.setHeader('Content-Type', 'text/*')
+        res.write('Get Request')
+        console.log("Get Request Made")
+    },
+    POST: (req, res) => {
+        res.setHeader('Content-Type', 'text/html')
+        res.write('Post Request')
+        console.log("Post Request Made")
+    }
+})
 
 app.listen(5000, ()=>{
     console.log("Server Started")
