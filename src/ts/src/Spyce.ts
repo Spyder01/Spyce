@@ -62,8 +62,14 @@ class Spyce {
            route: route,
            Api: Api
         })
-    }  
+    }
+    
+    
+
+    //Router 
+    
+
 
 }
 
-export default Spyce;
+module.exports = Spyce;

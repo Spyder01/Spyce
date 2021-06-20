@@ -10,8 +10,9 @@ class createApi {
 
    }
     //To handle http requests
-   request ({GET, POST, PUT, DELETE, PATCH}:any):any {
+   request ({GET, POST, PUT, DELETE, PATCH}:any, middleware:any=(req:any,res:any)=>{}):any {
          this.apis = (req:any, res:any)=>{
+             middleware(req,res);
             switch(req.method) {
                 case 'GET': GET (req, res)
                 break;
@@ -26,6 +27,7 @@ class createApi {
             }
          }
    }
+   
     //returns methods to be recorder in the recorder of class Spyce
     methods(req:any, res:any) {
         return this.apis(req, res)

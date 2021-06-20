@@ -7,8 +7,9 @@ class createApi {
         callback();
     }
     //To handle http requests
-    request({ GET, POST, PUT, DELETE, PATCH }) {
+    request({ GET, POST, PUT, DELETE, PATCH }, middleware = (req, res) => { }) {
         this.apis = (req, res) => {
+            middleware(req, res);
             switch (req.method) {
                 case 'GET':
                     GET(req, res);

@@ -15,7 +15,7 @@ const api1 = app.createApi('/api', ()=>{
 api1.request({
     GET: (req, res) => {
         res.setHeader('Content-Type', 'text/*')
-        res.end('Get Request')
+        //res.end('Get Request')
     
        for(let i=0; i<1000; i++){
         if(i%10==0)
@@ -32,6 +32,9 @@ api1.request({
         res.end('Put Request')
         console.log("Put Request Made")
     }
+}, (req,res) => {
+    console.log('Middleware')
+    console.log(req.url)
 })
 
 
