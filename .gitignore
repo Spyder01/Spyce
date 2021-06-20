@@ -105,4 +105,4 @@ dist
 .tern-port
 
 #Testing File
-./test
+test/
