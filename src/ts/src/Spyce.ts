@@ -25,6 +25,7 @@ class Spyce {
               case 'http':   {
                  const server = http.createServer((req, res):any =>{
                   this.record.forEach((api: { route: string | undefined; Api: { apis: (arg0: http.IncomingMessage, arg1: http.ServerResponse) => void; }; })=>{
+                    
                       if(api.route==req.url) {
                           api.Api.apis(req, res)
                       }
