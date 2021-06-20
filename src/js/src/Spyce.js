@@ -8,9 +8,9 @@ const https_1 = __importDefault(require("https"));
 const CreateApi_1 = __importDefault(require("./createApi/CreateApi"));
 class Spyce {
     constructor(server_type = { type: 'http', credentials: null }) {
-        //Class member to keep record of all routes url and underlying methods         
-        this.obj = server_type;
         this.record = [];
+        this.obj = server_type;
+        this.MIDDLEWARE = [() => { }];
     }
     //To create the server and start listening
     listen(port, callback) {
@@ -45,6 +45,14 @@ class Spyce {
         //Records Api methods
         this.Recorder(route, Api);
         return Api;
+    }
+    //FILLING MIDDLEWARE STACK  
+    use(middleware) {
+        this.MIDDLEWARE.push(middleware);
+        this.record.forEach(api => {
+            var { Api } = api;
+            Api.FetchMiddlewares(this.MIDDLEWARE);
+        });
     }
     //Records API methods
     Recorder(route, Api) {
