@@ -1,6 +1,7 @@
 /* To create Apis */ 
 
 import Req from '../request'
+import Res from '../response'
 
 class createApi {
    route: String;
@@ -13,16 +14,20 @@ class createApi {
 
    constructor (route: String, callback:any) {
              this.route = route;
+             console.log(this.route)
              callback ();
              this.GlobalMiddleware = [()=>{}];
              this.Middleware = [()=>{}]
 
    }
+
+ 
     //To handle http requests
    request ({GET, POST, PUT, DELETE, PATCH, MIDDLEWARE=[()=>{}]}:any):any {
        
-            this.apis = (request:any, res:any)=>{
-             const req = Req(request)
+            this.apis = (request:any, response:any)=>{
+             const req:any = Req(request)
+             const res:any = Res(request, response)
              //const req:any = Req(request)   
             //Implementing global middlewares
             this.GlobalMiddleware.forEach(method=>{

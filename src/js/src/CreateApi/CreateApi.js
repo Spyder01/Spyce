@@ -5,17 +5,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const request_1 = __importDefault(require("../request"));
+const response_1 = __importDefault(require("../response"));
 class createApi {
     constructor(route, callback) {
         this.route = route;
+        console.log(this.route);
         callback();
         this.GlobalMiddleware = [() => { }];
         this.Middleware = [() => { }];
     }
     //To handle http requests
     request({ GET, POST, PUT, DELETE, PATCH, MIDDLEWARE = [() => { }] }) {
-        this.apis = (request, res) => {
+        this.apis = (request, response) => {
             const req = request_1.default(request);
+            const res = response_1.default(request, response);
             //const req:any = Req(request)   
             //Implementing global middlewares
             this.GlobalMiddleware.forEach(method => {

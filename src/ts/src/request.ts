@@ -4,20 +4,34 @@
 
 
 
-const req= (request:any):any => {  
+const req= (request:any):any => {
+   const req:methods = new methods(request)  
     var reqDef = {
     host: {
-       value: host(request)
+       value: req.host()
     }
  }
 
-  return Object.create(request,reqDef)
+   Object.defineProperties(request,reqDef)
+   return request
 
 }
 
 export default req;
 
-const host:any = (req:any)=>{
-      const {rawHeaders} = req; 
-      return req.rawHeaders[rawHeaders.indexOf('Host')+1]
+
+class methods {
+   req: any;
+   constructor (request:any) {
+        this.req = request
+   }
+   
+ host:any = ()=>{
+   const {headers} = this.req; 
+   return headers.host;
+}
+
+params:any = (req:any)=>{
+   
+} 
 }

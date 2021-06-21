@@ -4,15 +4,24 @@
 */
 Object.defineProperty(exports, "__esModule", { value: true });
 const req = (request) => {
+    const req = new methods(request);
     var reqDef = {
         host: {
-            value: host(request)
+            value: req.host()
         }
     };
-    return Object.create(request, reqDef);
+    Object.defineProperties(request, reqDef);
+    return request;
 };
 exports.default = req;
-const host = (req) => {
-    const { rawHeaders } = req;
-    return req.rawHeaders[rawHeaders.indexOf('Host') + 1];
-};
+class methods {
+    constructor(request) {
+        this.host = () => {
+            const { headers } = this.req;
+            return headers.host;
+        };
+        this.params = (req) => {
+        };
+        this.req = request;
+    }
+}
