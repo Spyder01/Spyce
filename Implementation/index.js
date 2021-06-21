@@ -12,17 +12,21 @@ const api = app.createApi('/api', ()=>{
 
 //Assing http requests
 api.request({
+    //GET request
     GET: (req, res)=>{
         console.log('This is to prove get request works');
+        //Sending reponse
         res.json({
             status: "Success"
         })
     },
+    //POST request
     POST: async (req, res)=>{
+        //Fetching api body
         const b = await req.body
-        let body = await b()
-        console.log("BODbY", JSON.parse(body))
-        res.json(JSON.parse(body))
+        //let body = await b()
+        console.log("BODbY", b)
+        res.json(JSON.parse(b))
     },
     MIDDLEWARE: [()=>{
         console.log('This is to prove that Middleware stack works')
@@ -31,6 +35,8 @@ api.request({
     }]
 })
 
+
+//Global Middlewares
 app.use(()=>{
     console.log('This is to prove that GlobalMiddleware works\n ************************************\n')
 })

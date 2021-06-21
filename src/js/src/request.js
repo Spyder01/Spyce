@@ -20,7 +20,8 @@ const req = (request) => {
         },
         body: {
             value: () => __awaiter(void 0, void 0, void 0, function* () {
-                return yield req.body();
+                let body = yield req.body();
+                return body;
             })
         }
     };
