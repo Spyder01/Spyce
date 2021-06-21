@@ -1,9 +1,14 @@
 
-GET  http://localhost:5000/api/
+GET  http://localhost:5010/api
 
 ###
 
-POST  http://localhost:5000/id
+POST  http://localhost:5010/api 
+Content-Type: application/json
+
+{
+    "NAMS": "DJHG"
+}
 
 ###
 

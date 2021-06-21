@@ -9,6 +9,11 @@ const req= (request:any):any => {
     var reqDef = {
     host: {
        value: req.host()
+    },
+    body: {
+       value: async ()=>{
+         return await req.body()
+       }
     }
  }
 
@@ -30,6 +35,27 @@ class methods {
    const {headers} = this.req; 
    return headers.host;
 }
+
+body:any = () =>{
+   return new Promise((resolve, reject) => {
+      try {
+          let body = "";
+          // listen to data sent by client
+          this.req.on("data", (chunk:any):any => {
+              // append the string version to the body
+              body += chunk.toString();
+          });
+          // listen till the end
+          this.req.on("end", () => {
+              // send back the data
+
+              resolve(body);
+          });
+      } catch (error) {
+          reject(error);
+      }
+  });
+} 
 
 params:any = (req:any)=>{
    
