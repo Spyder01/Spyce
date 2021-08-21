@@ -1,4 +1,4 @@
-const Spyce = require('./js/src/Spyce')
+const Spyce = require('./spyce')
 
 module.exports  = Spyce 
 
