@@ -21,7 +21,7 @@ class Spyce {
              3.  Finally the additional middlewares i.e one used with api.use() are executed at the end. 
         
         *****************************************************************        
-        NOTE: It is important to know that currently in Spyce middlewares are executed first, before any specific HTTTP request codes are executed. 
+        NOTE: It is important to know that currently in Spyce middlewares are executed first, before any specific HTTP request codes are executed. 
     
     
     
