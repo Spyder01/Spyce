@@ -87,7 +87,6 @@ class Spyce {
 
        //Records API methods
       Recorder(route: String, Api:any) {
-          console.log(route, "Rouueuo")
          this.record.push({
            route: route,
            Api: Api

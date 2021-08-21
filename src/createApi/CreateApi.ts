@@ -14,7 +14,7 @@ class createApi {
 
    constructor (route: String, callback:any) {
              this.route = route;
-             console.log(this.route)
+
              callback ();
              this.GlobalMiddleware = [()=>{}];
              this.Middleware = [()=>{}]
