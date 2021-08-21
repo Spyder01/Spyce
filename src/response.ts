@@ -48,6 +48,11 @@ class methods {
   json:any = (content:object):void =>{
     this.res.writeHead(200, {'Content-type': 'application/json'})
     this.res.end(JSON.stringify({content}))
-}
+  }
+  
+  send:any = (content:string)=>{
+    this.res.set('Content-Type', 'text/html');
+    this.res.end(content);
+  }
 }
 

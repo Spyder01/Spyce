@@ -22,11 +22,11 @@ api.request({
     },
     //POST request
     POST: async (req, res)=>{
-        //Fetching api body
+        //Fetching api
         const b = await req.body
-        //let body = await b()
-        console.log("BODbY", b)
-        res.json(JSON.parse(b))
+        let body = await b()
+        console.log("BODbY", JSON.parse(body))
+        res.json(JSON.parse(body))
     },
     MIDDLEWARE: [()=>{
         console.log('This is to prove that Middleware stack works')
