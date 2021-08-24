@@ -1,6 +1,13 @@
 # Spyce
 A personal backend framework for node.js. 
  
+ 
+### Install the npm package
+``` Shell
+    npm i spyce
+```
+
+#### If you want to build from the github repository
 ### Build the js framework 
 ``` Shell     
     npm run buid
@@ -35,7 +42,7 @@ const api = app.createApi('/api', ()=>{
 #### Basic api body.
 ``` Javascript
 api.request({
-    //GET request
+    // GET request
     GET: (req, res)=>{
         console.log('This is to prove get request works');
         //Sending reponse
@@ -43,7 +50,7 @@ api.request({
             status: "Success"
         })
     },
-    //POST request
+    // POST request
     POST: async (req, res)=>{
         //Fetching api
         const body = await req.body ()
@@ -58,6 +65,11 @@ api.request({
     }]
 })
 ```
+#### Set static folder:
+```Javascript
+app.setStatic ('public') // Here public is a static folder.  
+```
+
 #### Using Global middlewares
 
 ``` Javascript

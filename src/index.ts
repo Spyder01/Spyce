@@ -1,5 +1,6 @@
 import http from "http";
 import https from "https";
+import * as statik from 'node-static';
 import createApi  from './createApi/CreateApi';
 
 interface ServerType {
@@ -8,31 +9,34 @@ interface ServerType {
 }
 
 class Spyce {
-     //Class member to keep record of all routes url and underlying methods   
+     //Class member to keep record of all routes url and underlying methods
     record: any[]
     //Class member to specify protocol type http or https.
     obj: ServerType
 
+    staticFiles: any[]
+
     /*
         ****************************************************************
-        NOTE: All the middlewares in Spyce follow a certain heirarchy in execution i.e, 
-             1.  Global Middlewares are executed first. 
-             2.  Middlewares defined during api defination are executed next. 
-             3.  Finally the additional middlewares i.e one used with api.use() are executed at the end. 
-        
-        *****************************************************************        
-        NOTE: It is important to know that currently in Spyce middlewares are executed first, before any specific HTTP request codes are executed. 
-    
-    
-    
+        NOTE: All the middlewares in Spyce follow a certain heirarchy in execution i.e,
+             1.  Global Middlewares are executed first.
+             2.  Middlewares defined during api defination are executed next.
+             3.  Finally the additional middlewares i.e one used with api.use() are executed at the end.
+
+        *****************************************************************
+        NOTE: It is important to know that currently in Spyce middlewares are executed first, before any specific HTTP request codes are executed.
+
+
+
     */
 
-    //Array to store all the global middlewares 
+    //Array to store all the global middlewares
     MIDDLEWARE: any[]
-   
+
 
     constructor(server_type:ServerType = {type: 'http', credentials: null}) {
         this.record = [];
+        this.staticFiles = [];
         this.obj = server_type
         this.MIDDLEWARE = [()=>{}]
     }
@@ -43,11 +47,12 @@ class Spyce {
               case 'http':   {
                  const server = http.createServer((req, res):any =>{
                   this.record.forEach((api: { route: string | undefined; Api: { apis: (arg0: http.IncomingMessage, arg1: http.ServerResponse) => void; }; })=>{
-                    
+
                       if(api.route==req.url) {
                           api.Api.apis(req, res)
                       }
                   })
+                this.serveStatic (req, res) 
               })
               server.listen(port, callback)
             }
@@ -59,24 +64,25 @@ class Spyce {
                        api.Api.apis(req, res)
                    }
                })
+              this.serveStatic (req, res)
            })
            server.listen(port, callback)
          }
           }
-              
+
           }
- 
-        
+
+
         //Initializing Api
         createApi(route:String, callback:any) {
         var Api = new createApi(route, callback)
-        
+
         //Records Api methods
         this.Recorder(route, Api)
         return Api
  }
 
-  //FILLING MIDDLEWARE STACK  
+  //FILLING MIDDLEWARE STACK
   use(middleware: any) {
        this.MIDDLEWARE.push(middleware)
        this.record.forEach(api=>{
@@ -85,6 +91,18 @@ class Spyce {
        })
   }
 
+  //Records static directories
+   setStatic (dirname:string) {
+      const file = new statik.Server(`./${dirname}`);
+      this.staticFiles.push(file)
+   }
+
+   //serve Static Files
+    serveStatic (req:any, res:any) {
+      this.staticFiles.forEach(file=>{
+          file.serve (req, res)
+      })
+    }
        //Records API methods
       Recorder(route: String, Api:any) {
          this.record.push({
@@ -92,9 +110,9 @@ class Spyce {
            Api: Api
         })
     }
-    
-    
-    
+
+
+
 
 
 }
