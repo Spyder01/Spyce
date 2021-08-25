@@ -14,6 +14,9 @@ const response: any = (request:any, response:any) => {
           },
           redirectUrl: {
               value: (url:string)=>{res.redirectUrl(url)}
+          },
+          send: {
+              value: (content:string)=>{res.send(content)}
           }
 
       } 
